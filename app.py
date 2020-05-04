@@ -1,13 +1,15 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, render_template
+app = Flask(__name__, static_url_path='')
  
 @app.route('/')
-def hello_world():
-  return '주말 잘 보내세요\n우혁프로님, 남기경 대리님, 오건철 대리님'
- 
-@app.route('/admin')
-def adminPage():
-  return "Out!!!!"
+def index():
+  return render_template('/login.html')
+
+
+@app.route('/dashboard')
+def dashborad():
+  return render_template('/index.html')
+
 
 if __name__ == '__main__':
   app.run('0.0.0.0', port=5000)
