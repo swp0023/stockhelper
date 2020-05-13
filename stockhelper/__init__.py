@@ -16,6 +16,9 @@ def index():
 def dashborad():
   return render_template('/index.html')
 
+@app.route('/register')
+def register():
+  return render_template('/register.html')
 
 @app.errorhandler(404)
 def page_not_found_error(error):
