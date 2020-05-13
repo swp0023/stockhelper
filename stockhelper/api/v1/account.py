@@ -23,3 +23,19 @@ def login():
     #     return jsonify(code=200, msg=RESPONSE_MSG_200)
     return jsonify(code=200)
     # return jsonify(code=403, msg='계정이 존재하지 않거나, 비밀번호가 일치하지 않습니다.'), 403
+
+
+# 1. endpoint 하나 추가
+# 2. json으로 id, password, username
+# 3. print('처리완료') 출력
+# 4. return jsonify(code=200)
+
+@api_v1_account.route('/register')
+    def register():
+         try:
+        id       = request.json.get('id')
+        password = request.json.get('password')
+        username = request.json.get('username')
+    except Exception as e:
+        print('처리완료')
+ return jsonify(code=200)
