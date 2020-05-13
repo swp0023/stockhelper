@@ -30,12 +30,13 @@ def login():
 # 3. print('처리완료') 출력
 # 4. return jsonify(code=200)
 
-@api_v1_account.route('/register', method = ['POST'])
+@api_v1_account.route('/register', methods = ['POST'])
 def register():
     try:
         id       = request.json.get('id')
         password = request.json.get('password')
         username = request.json.get('username')
-    except Exception as e:
         print('처리완료')
- return jsonify(code=200)
+    except Exception as e:
+        print(e)
+    return jsonify(code=200)
