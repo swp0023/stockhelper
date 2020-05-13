@@ -30,9 +30,9 @@ def login():
 # 3. print('처리완료') 출력
 # 4. return jsonify(code=200)
 
-@api_v1_account.route('/register')
-    def register():
-         try:
+@api_v1_account.route('/register', method = ['POST'])
+def register():
+    try:
         id       = request.json.get('id')
         password = request.json.get('password')
         username = request.json.get('username')
