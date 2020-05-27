@@ -1,10 +1,10 @@
 from datetime import timedelta
 
-# DATABASE_USER = ''
-# DATABASE_PASSWORD = ''
-# DATABASE_DB = ''
-# DATABASE_HOST = '127.0.0.1'
-# DATABASE_PORT = 5432
+DATABASE_USER = 'stockhelper'
+DATABASE_PASSWORD = 'shibot2020!'
+DATABASE_DB = 'stockhelper'
+DATABASE_HOST = '127.0.0.1'
+DATABASE_PORT = 3306
 
 # REDIS_HOST = '127.0.0.1'
 # REDIS_PORT = 6379
