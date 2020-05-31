@@ -23,14 +23,5 @@ db_session = scoped_session(
 Base = declarative_base()
 
 def init_db():
-    # import burnin.models
     Base.metadata.create_all(engine)
-
-    # from burnin.models import User
-    # db_session.add_all([
-    #     User(username='admin', password='fortinet'),
-    #     User(username='test', password='fortinet')
-    # ])
-    # db_session.commit()
-
     print('Initialized the database.')
