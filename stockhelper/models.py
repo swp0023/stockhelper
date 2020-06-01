@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP
+from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP, ForeignKey
 from stockhelper.database import Base
 
 class ACCOUNT(Base):
@@ -9,12 +9,7 @@ class ACCOUNT(Base):
     password = Column(String(20), nullable=False)
     email = Column(String(40), unique=True)
     email_cert = Column(Boolean, default=False)
-    register_datetime = Column(TIMESTAMP)
-    register_ip = Column(String(15))
-    lastlogin_datetime = Column(TIMESTAMP)
-    lastlogin_ip = Column(String(15))
-    # admin = Column()
-    # status = Column()
+    admin = Column(Boolean, default=False)
 
     def __init__(self, username=None, password=None):
         self.username = username
@@ -26,3 +21,11 @@ class ACCOUNT(Base):
             'username': self.username,
             'password': self.password
         }
+
+class LOGIN_LOG(Base):
+    __tablename__ = 'login_log'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    account_id = Column(Integer, ForeignKey('account.id'), nullable=False)
+    login_datetime = Column(TIMESTAMP)
+    login_ip = Column(String(15))
