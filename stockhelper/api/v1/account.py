@@ -31,7 +31,7 @@ def login():
     password = request.json.get('password')
     ip = request.json.get('ip')
 
-    if not username or not password:
+    if not username or not password or not ip:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
