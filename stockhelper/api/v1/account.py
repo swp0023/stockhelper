@@ -27,9 +27,13 @@ def login_session(username, remember):
 
 @api_v1_account.route('/login', methods = ['POST'])
 def login():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    ip = request.json.get('ip')
+    try:
+        username = request.json.get('username')
+        password = request.json.get('password')
+        ip = request.json.get('ip')
+    except Exception as e:
+        print(e)
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     if not username or not password or not ip:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
@@ -38,17 +42,20 @@ def login():
     
     if user is not None and check_password_hash(user.password, password):
         insert_into_login_log(user.id, ip)
-        login_session(username, True)
+        # login_session(username, True)
         return jsonify(code=200, msg=RESPONSE_MSG_200)
     return jsonify(code=403, msg='계정이 존재하지 않거나, 비밀번호가 일치하지 않습니다.'), 403
 
 
 @api_v1_account.route('/regist', methods = ['POST'])
 def register():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    ip = request.json.get('ip')
-    email = request.json.get('email')
+    try:
+        username = request.json.get('username')
+        password = request.json.get('password')
+        ip = request.json.get('ip')
+        email = request.json.get('email')
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     if not username or not password or not ip or not email:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
@@ -75,8 +82,8 @@ def register():
 def logout():
     username = request.json.get('username')
 
-    if session.get(username, None):
-        login_session(username, False)
+    # if session.get(username, None):
+    #     login_session(username, False)
     
     return jsonify(code=200, msg=RESPONSE_MSG_200)
 
