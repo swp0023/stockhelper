@@ -35,7 +35,7 @@ def login():
         print(e)
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
-    if not username or not password or not ip:
+    if not username or not password:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
@@ -57,7 +57,7 @@ def register():
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
-    if not username or not password or not ip or not email:
+    if not username or not password or not email:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
