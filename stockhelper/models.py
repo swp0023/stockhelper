@@ -14,7 +14,7 @@ class ACCOUNT(Base):
     admin = Column(Boolean, default=False)
     nickname = Column(String(20), unique=True, nullable=False)
 
-    def __init__(self, username=None, password=None, email=None):
+    def __init__(self, username=None, password=None, email=None, nickname=None):
         self.username = username
         self.password = password
         self.email = email
