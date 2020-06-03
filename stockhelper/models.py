@@ -12,11 +12,13 @@ class ACCOUNT(Base):
     email = Column(String(40), unique=True)
     email_cert = Column(Boolean, default=False)
     admin = Column(Boolean, default=False)
+    nickname = Column(String(20), unique=True, nullable=False)
 
     def __init__(self, username=None, password=None, email=None):
         self.username = username
         self.password = password
         self.email = email
+        self.nickname = nickname
 
     def to_dict(self):
         return {
