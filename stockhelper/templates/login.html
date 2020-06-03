@@ -48,19 +48,24 @@
                                         <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
                                     </div>
 
-                                    <div class="form-group mb-3">
+                                    <!-- <div class="form-group mb-3">
                                         <div class="custom-control custom-checkbox checkbox-info">
                                             <input type="checkbox" class="custom-control-input" id="checkbox-signin">
                                             <label class="custom-control-label" for="checkbox-signin">Remember me</label>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- <div class="form-group mb-0 text-center">
                                         <button class="btn btn-danger btn-block" type="submit"> Log In </button>
                                     </div> -->
 
-                                    <div class="form-group mb-0 text-center">
-                                        <a class="btn btn-danger btn-block" id="login">log In</a>
+                                    <div class="form-group mb-3 text-center">
+                                        <a class="btn btn-danger btn-block" id="login" href=''>log In</a>
+                                        <!-- <button class="btn btn-danger btn-block" type="submit"> Log In </button> -->
+                                    </div>
+
+                                    <div class="form-group mb-3 text-center">
+                                        <a class="btn btn-danger btn-block" id="guest" href="/dashboard">Enter as a Guest</a>
                                         <!-- <button class="btn btn-danger btn-block" type="submit"> Log In </button> -->
                                     </div>
 
@@ -147,5 +152,12 @@
                 }
             });
         })
+
+        $(document).ready(function() {
+            $("#password").keydown(function(key) {
+                if (key.keyCode == 13) $("#login").click();
+            });
+        });
+
     </script>
 </html>
