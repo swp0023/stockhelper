@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from stockhelper.config import RESPONSE_MSG_200, RESPONSE_MSG_400
+from stockhelper.config import REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT, RESPONSE_MSG_200, RESPONSE_MSG_400
 from stockhelper.database import db_session
+from stockhelper.common.send_mail import send_mail
 
 from stockhelper.models import ACCOUNT, LOGIN_LOG
 
@@ -76,6 +77,7 @@ def register():
     db_session.flush()
 
     insert_into_login_log(new_user.id, ip)
+    send_mail(new_user.email, REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT + str(new_user.email_cert_code))
 
     return jsonify(code=200)
 
