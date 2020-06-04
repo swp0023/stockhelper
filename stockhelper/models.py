@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, TIMESTAMP, ForeignKey, DateTime
 from stockhelper.database import Base
 from sqlalchemy.sql import func
+import random
 
 
 class ACCOUNT(Base):
@@ -8,11 +9,12 @@ class ACCOUNT(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(20), unique=True, nullable=False)
+    nickname = Column(String(20), unique=True, nullable=False)
     password = Column(String(100), nullable=False)
     email = Column(String(40), unique=True)
     email_cert = Column(Boolean, default=False)
+    email_cert_code = Column(Integer, default=int(random.random()*1000000))
     admin = Column(Boolean, default=False)
-    nickname = Column(String(20), unique=True, nullable=False)
 
     def __init__(self, username=None, password=None, email=None, nickname=None):
         self.username = username
