@@ -77,7 +77,7 @@ def register():
     db_session.flush()
 
     insert_into_login_log(new_user.id, ip)
-    send_mail(new_user.email, REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT + new_user.email_cert_code)
+    send_mail(new_user.email, REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT + str(new_user.email_cert_code))
 
     return jsonify(code=200)
 
