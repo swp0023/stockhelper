@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from stockhelper.config import REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT, RESPONSE_MSG_200, RESPONSE_MSG_400
+from stockhelper.config import REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT, RESPONSE_MSG_200, RESPONSE_MSG_400, RESPONSE_MSG_200_NOUSER, RESPONSE_MSG_200_NOTAUTHORIZED, RESPONSE_MSG_500
 from stockhelper.database import db_session
 from stockhelper.common.send_mail import send_mail
 
@@ -41,11 +41,14 @@ def login():
 
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
     
+    if user.email_cert is False:
+        return 'MOVE PAGE TO MAIL CERT PAGE USER'
+
     if user is not None and check_password_hash(user.password, password):
         insert_into_login_log(user.id, ip)
         # login_session(username, True)
         return jsonify(code=200, msg=RESPONSE_MSG_200)
-    return jsonify(code=403, msg='계정이 존재하지 않거나, 비밀번호가 일치하지 않습니다.'), 403
+    return jsonify(code=403, msg=RESPONSE_MSG_200_NOUSER), 403
 
 
 @api_v1_account.route('/regist', methods = ['POST'])
@@ -90,4 +93,24 @@ def logout():
     #     login_session(username, False)
     
     return jsonify(code=200, msg=RESPONSE_MSG_200)
+
+
+@api_v1_account.route('/mailCert', methods = ['POST'])
+def mail_cert():
+    try:
+        username = request.json.get('username')
+        email = request.json.get('email')
+        email_cert_code = request.json.get('emailCertCode')
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+    
+    user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
+
+    if user is None:
+        return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
+
+    if user.email == email and user.email_cert_code == email_cert_code:
+        return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
+
+    return jsonify(code=500, msg=RESPONSE_MSG_500)
 
