@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-danger btn-block" type="submit"> Sign Up </button>
+                                        <button class="btn btn-danger btn-block" id="signup" type="submit"> Sign Up </button>
                                     </div>
 
                                 </form>
@@ -116,4 +116,45 @@
         <script src="assets/js/app.min.js"></script>
         
     </body>
+
+    <script>
+        var ip = '';
+
+        $.getJSON("https://api.ipify.org/?format=json", function(e) {
+            ip = e.ip;
+        });
+
+        $("#signup").click(function () {
+            var data = {
+                "username": $('#username').val(),
+                "password": $('#password').val(),
+                "ip": ip,
+                "email": $('#email').val(),
+                "nickname": $('#nickname').val()
+            }
+
+            $.ajax({
+                url: '/api/v1/account/register',
+                type: 'post',
+                timeout: 10000,
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                data: JSON.stringify(data),
+
+                success: function (data) {
+                    window.location.href = "/dashboard";
+                },
+                error: function (data) {
+                    alert('login fail')
+                }
+            });
+        })
+
+        $(document).ready(function() {
+            $("#password").keydown(function(key) {
+                if (key.keyCode == 13) $("#login").click();
+            });
+        });
+
+    </script>
 </html>

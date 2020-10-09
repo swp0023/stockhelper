@@ -51,7 +51,7 @@ def login():
     return jsonify(code=403, msg=RESPONSE_MSG_200_NOUSER), 403
 
 
-@api_v1_account.route('/regist', methods = ['POST'])
+@api_v1_account.route('/register', methods = ['POST'])
 def register():
     try:
         username = request.json.get('username')
