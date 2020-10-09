@@ -20,7 +20,7 @@ RESPONSE_MSG_200_NOTAUTHORIZED = '계정이 인증되지 않았습니다.'
 MAIL_SMTP_SERVER = 'smtp.naver.com'
 MAIL_FROM = 'swp607@naver.com'
 MAIL_ID = 'swp607'
-MAIL_PASSWORD = 'wjddnr1*'
+MAIL_PASSWORD = 'qkrtjddn!23*'
 
 REGIST_MAIL_SUBJECT = 'NSTOCK email code'
 REGIST_MAIL_CONTENT = 'Certification Code : '
