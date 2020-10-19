@@ -96,21 +96,29 @@ def logout():
 
 
 @api_v1_account.route('/mailCert', methods = ['POST'])
-def mail_cert():
+def mailCert():
     try:
         username = request.json.get('username')
         email = request.json.get('email')
         email_cert_code = request.json.get('emailCertCode')
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+
+    if not username or not email or not email_cert_code:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
     
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
 
     if user is None:
+        return jsonify(code=200, msg=RESPONSE_MSG_200_NOUSER), 200
+
+    if user.email_cert_code != int(email_cert_code):
         return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
 
-    if user.email == email and user.email_cert_code == email_cert_code:
-        return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
+    if user.email == email and user.email_cert_code == int(email_cert_code):
+        user.email_cert = 1
+        db_session.commit()
+        return jsonify(code=200, msg=RESPONSE_MSG_200), 200
 
     return jsonify(code=500, msg=RESPONSE_MSG_500)
 

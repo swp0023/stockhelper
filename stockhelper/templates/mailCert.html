@@ -26,15 +26,15 @@
                         <div class="card">
 
                             <div class="card-body p-4">
-                                
+
                                 <div class="text-center w-75 m-auto">
                                     <a href="/">
                                         <span><img src="assets/images/logo-dark.png" alt="" height="26"></span>
                                     </a>
-                                    <p class="text-muted mb-4 mt-3">Don't have an account? Create your free account now.</p>
+                                    <p class="text-muted mb-4 mt-3">Insert certification code</p>
                                 </div>
 
-                                <h5 class="auth-title">Create Account</h5>
+                                <h5 class="auth-title">Email certification</h5>
 
                                 <form action="#">
 
@@ -43,26 +43,15 @@
                                         <input class="form-control" type="text" id="username" placeholder="Enter your username" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input class="form-control" type="password" required id="password" placeholder="Enter your password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fullname">Nickname</label>
-                                        <input class="form-control" type="text" id="nickname" placeholder="Enter your nickname" required>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="emailaddress">Email address</label>
                                         <input class="form-control" type="email" id="email" required placeholder="Enter your email">
                                     </div>
-                                    
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox checkbox-info">
-                                            <input type="checkbox" class="custom-control-input" id="checkbox-signup">
-                                            <label class="custom-control-label" for="checkbox-signup">I accept <a href="javascript: void(0);" class="text-dark">Terms and Conditions</a></label>
-                                        </div>
+                                        <label for="fullname">Certification code</label>
+                                        <input class="form-control" type="text" id="emailCertCode" placeholder="Enter your username" required>
                                     </div>
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-danger btn-block" id="signup" type="submit"> Sign Up </button>
+                                        <button class="btn btn-danger btn-block" id="submit" type="submit"> Submit </button>
                                     </div>
 
                                 </form>
@@ -106,7 +95,7 @@
 
 
         <footer class="footer footer-alt">
-            2020 &copy; <a href="/" class="text-muted">stockhelper</a> 
+            2020 &copy; <a href="/" class="text-muted">stockhelper</a>
         </footer>
 
         <!-- Vendor js -->
@@ -114,7 +103,7 @@
 
         <!-- App js -->
         <script src="assets/js/app.min.js"></script>
-        
+
     </body>
 
     <script>
@@ -124,17 +113,16 @@
             ip = e.ip;
         });
 
-        $("#signup").click(function () {
+        $("#submit").click(function () {
             var data = {
                 "username": $('#username').val(),
-                "password": $('#password').val(),
-                "ip": ip,
                 "email": $('#email').val(),
-                "nickname": $('#nickname').val()
+                "emailCertCode": $('#emailCertCode').val(),
+                "ip": ip,
             }
 
             $.ajax({
-                url: '/api/v1/account/register',
+                url: '/api/v1/account/mailCert',
                 type: 'post',
                 timeout: 10000,
                 contentType:"application/json; charset=utf-8",
@@ -142,17 +130,17 @@
                 data: JSON.stringify(data),
 
                 success: function (data) {
-                    window.location.href = "/mailCert";
+                    window.location.href = "/dashboard";
                 },
                 error: function (data) {
-                    alert('registration fail')
+                    alert('certification fail')
                 }
             });
         })
 
         $(document).ready(function() {
-            $("#password").keydown(function(key) {
-                if (key.keyCode == 13) $("#signup").click();
+            $("#mailcert").keydown(function(key) {
+                if (key.keyCode == 13) $("#submit").click();
             });
         });
 
