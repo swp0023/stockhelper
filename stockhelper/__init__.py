@@ -16,13 +16,18 @@ def index():
 
 
 @app.route('/dashboard')
-def dashborad():
+def dashboard():
   return render_template('/index.html')
 
 
 @app.route('/register')
 def register():
   return render_template('/register.html')
+
+
+@app.route('/mailCert')
+def mail_cert():
+  return render_template('/mailCert.html')
 
 
 @app.errorhandler(404)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from stockhelper.config import REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT, RESPONSE_MSG_200, RESPONSE_MSG_400, RESPONSE_MSG_200_NOUSER, RESPONSE_MSG_200_NOTAUTHORIZED, RESPONSE_MSG_500
+from stockhelper.config import REGIST_MAIL_SUBJECT, REGIST_MAIL_CONTENT, RESPONSE_MSG_200, RESPONSE_MSG_400, RESPONSE_MSG_403_NOUSER, RESPONSE_MSG_401_NOTAUTHORIZED, RESPONSE_MSG_500
 from stockhelper.database import db_session
 from stockhelper.common.send_mail import send_mail
 
@@ -48,7 +48,7 @@ def login():
         insert_into_login_log(user.id, ip)
         # login_session(username, True)
         return jsonify(code=200, msg=RESPONSE_MSG_200)
-    return jsonify(code=403, msg=RESPONSE_MSG_200_NOUSER), 403
+    return jsonify(code=403, msg=RESPONSE_MSG_403_NOUSER), 403
 
 
 @api_v1_account.route('/register', methods = ['POST'])
@@ -103,14 +103,22 @@ def mail_cert():
         email_cert_code = request.json.get('emailCertCode')
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+
+    if not username or not email or not email_cert_code:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
     
     user = db_session.query(ACCOUNT).filter(ACCOUNT.username == username).first()
 
     if user is None:
-        return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
+        return jsonify(code=403, msg=RESPONSE_MSG_403_NOUSER), 403
 
-    if user.email == email and user.email_cert_code == email_cert_code:
-        return jsonify(code=200, msg=RESPONSE_MSG_200_NOTAUTHORIZED), 200
+    if user.email_cert_code != int(email_cert_code):
+        return jsonify(code=401, msg=RESPONSE_MSG_401_NOTAUTHORIZED), 401
+
+    if user.email == email and user.email_cert_code == int(email_cert_code):
+        user.email_cert = 1
+        db_session.commit()
+        return jsonify(code=200, msg=RESPONSE_MSG_200), 200
 
     return jsonify(code=500, msg=RESPONSE_MSG_500)
 
