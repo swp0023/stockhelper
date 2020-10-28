@@ -24,8 +24,9 @@ def dashboard():
 def register():
   return render_template('/register.html')
 
+
 @app.route('/mailCert')
-def mailCert():
+def mail_cert():
   return render_template('/mailCert.html')
 
 
