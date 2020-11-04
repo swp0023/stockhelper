@@ -26,7 +26,7 @@ def login_session(username, remember):
         session.pop(username, None)
 
 
-@api_v1_account.route('/login', methods = ['POST'])
+@api_v1_account.route('/login', methods=['POST'])
 def login():
     try:
         username = request.json.get('username')
@@ -51,7 +51,7 @@ def login():
     return jsonify(code=403, msg=RESPONSE_MSG_403_NOUSER), 403
 
 
-@api_v1_account.route('/register', methods = ['POST'])
+@api_v1_account.route('/register', methods=['POST'])
 def register():
     try:
         username = request.json.get('username')
@@ -85,7 +85,7 @@ def register():
     return jsonify(code=200)
 
 
-@api_v1_account.route('/logout', methods = ['POST'])
+@api_v1_account.route('/logout', methods=['POST'])
 def logout():
     username = request.json.get('username')
 
@@ -95,7 +95,7 @@ def logout():
     return jsonify(code=200, msg=RESPONSE_MSG_200)
 
 
-@api_v1_account.route('/mailCert', methods = ['POST'])
+@api_v1_account.route('/mailCert', methods=['POST'])
 def mail_cert():
     try:
         username = request.json.get('username')
