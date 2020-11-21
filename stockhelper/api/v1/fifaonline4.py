@@ -131,16 +131,46 @@ def get_wdl_match_table(users, user_match_result):
                 else:
                     print('error')
 
-                print(now_user, match_result, now_match, result[row][column][i][0], type(result[row][column][i][0]))
-
+                # print(now_user, match_result, now_match, row, column)
                 if match_result == 'W':
-                    result[row][column][i][0] = int(result[row][column][i][0]) + 1
+                    result[row][column][0] += 1
                 elif match_result == 'D':
-                    result[row][column][i][1] = int(result[row][column][i][1]) + 1
+                    result[row][column][1] += 1
                 else:
-                    result[row][column][i][2] = int(result[row][column][i][2]) + 1
+                    result[row][column][2] += 1
+
     return result
 
+
+def get_rank_table(users, wdl_match_table):
+    temp_result = [[] for i in users]
+
+    for row in range(0, len(wdl_match_table)):
+        temp_result[row].append(users[row])
+        w = d = l = 0
+
+        for column in range(0, len(wdl_match_table[row])):
+            w += wdl_match_table[row][column][0]
+            d += wdl_match_table[row][column][1]
+            l += wdl_match_table[row][column][2]
+        
+        temp_result[row].append(w + d + l)
+        temp_result[row].append(w*3 + d*1)
+        temp_result[row].append(w)
+        temp_result[row].append(d)
+        temp_result[row].append(l)
+                
+    temp_result.sort(key=lambda x: x[2])
+    temp_result.reverse()
+
+    result = []
+    result.append(['순위', '팀', '경기수', '승점', '승', '무', '패', '득점', '실점', '득실차', '도움', '파울'])
+    rank = 1
+    for row in temp_result:
+        result.append([rank, row[0], row[1], row[2], row[3], row[4], row[5], 0, 0, 0, 0, 0])
+        rank += 1
+
+    return result
 
 
 # users = ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성']
@@ -148,9 +178,18 @@ def get_wdl_match_table(users, user_match_result):
 # match_raw_data = get_match_raw_data(users)
 # users_match_raw_table = get_match_data_user_table(users, match_raw_data)
 
-# wdl_match_table = get_wdl_match_table(users, users_match_raw_table)
 
-# for i in wdl_match_table:
+
+
+# wdl_match_table = get_wdl_match_table(users, users_match_raw_table)
+# rank_table = get_rank_table(users, wdl_match_table)
+
+
+# for i in rank_table:
+#     print(i)
+
+# for i in rank_table:
+#     result = ''
 #     for j in i:
-#         print(j)
-#     print('------------')
+#         result += str(j) + '\t'
+#     print(result)
