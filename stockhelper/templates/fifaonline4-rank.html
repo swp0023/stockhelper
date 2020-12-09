@@ -17,6 +17,12 @@
         <link href="assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
         <!-- third party css end -->
 
+        <!-- Plugins css-->
+        <link href="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/libs/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -199,6 +205,27 @@
 
         <div class="wrapper">
             <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-lg-6">
+    
+                        <div class="card-box">
+                            <h4 class="header-title">Date Range Picker</h4>
+                            <p class="sub-header">A JavaScript component for choosing date ranges, dates and times.</p>
+    
+                            <div class="form-group mb-3">
+                                <label>Date Range</label>
+                                <input type="text" class="form-control date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning">
+                            </div>
+    
+                        </div>
+                        <!-- end card-box-->
+    
+                    </div>
+                    <!-- end col-->
+    
+                </div>
+                <!-- end col -->
 
                 <!-- start page title -->
                 <div class="row">
@@ -833,6 +860,16 @@
 
         <!-- Vendor js -->
         <script src="assets/js/vendor.min.js"></script>
+
+        <!-- Plugins js-->
+        <script src="assets/libs/moment/moment.min.js"></script>
+        <script src="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+        <script src="assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
+        <script src="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+
+        <!-- Init js-->
+        <script src="assets/js/pages/form-pickers.init.js"></script>
 
         <!-- third party js -->
         <script src="assets/libs/datatables/jquery.dataTables.min.js"></script>
