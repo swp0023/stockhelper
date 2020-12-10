@@ -537,6 +537,23 @@
     </body>
 
     <script>
+        var matchRawData = [];
+
+        function refreshMatchDataTable(){
+            $("#matchDatas").empty();
+            for (let row = matchRawData.length-1; row >= 0; row--){
+                let result = '<tr>'
+                console.log(result, matchRawData[row])
+                for (let i = 0; i < matchRawData[row].length; i++) {
+                    result += '<td>' + matchRawData[row][i] + '</td>'
+                }
+                result += '</tr>'
+                $("#matchDatas").append(result);
+            }
+
+        }
+
+
         // var ip = '';
 
         // $.getJSON("https://api.ipify.org/?format=json", function(e) {
@@ -559,17 +576,20 @@
                 data: JSON.stringify(data),
     
                 success: function (data) {
-                    alert(data)
+                    matchRawData = data['matchRawData'];
+                    refreshMatchDataTable();
                 }, beforeSend:function() {
                     $('#getMatchData').attr('disabled', true)
                     $('#matchDatas').children('tr').children()[0].textContent = 'Loading'
                 }, complete:function(){
                     $('#getMatchData').attr('disabled', false)
                 }, error: function (data) {
-                    alert('get data failed. sorry')
+                    alert('get data error. sorry')
                 }
             });
-        })
+        });
+
+        
 
     </script>
 </html>
