@@ -1,15 +1,11 @@
-import requests
+from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
+import requests
+
+from stockhelper.config import APIKEY_FIFAONLINE4
 
 
-APIKEY = '''eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiMTE3NDQzNjk5OCIsImF1dGhfaWQiOiIyIiwidG9rZW5fdHlwZSI6IkFjY2Vzc1Rva2VuIiwic2VydmljZV9pZCI6IjQzMDAxMTQ4MSIsIlgtQXBwLVJhdGUtTGltaXQiOiI1MDA6MTAiLCJuYmYiOjE2MDU0MjU2MjQsImV4cCI6MTYyMDk3NzYyNCwiaWF0IjoxNjA1NDI1NjI0fQ.T70wy14ebzWz-6q-XrHoSeu2HBcy-0TuJ20wm0qhnMA'''
-MAX_GAME_PER_USER = 5
-PERIOD_START = '2020-01-01'
-PERIOD_END = '2020-12-31'
-PERIOD_END_ORIGIN = PERIOD_END
-
-dt = datetime.strptime(PERIOD_END, '%Y-%m-%d')
-PERIOD_END = str(dt + timedelta(days=1))
+api_v1_fifaonline4 = Blueprint('api_v1_fifaonline4', __name__)
 
 
 def matchtype():
@@ -21,7 +17,7 @@ def matchtype():
 def get_users(nickname):
     url = '''https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname={}'''.format(nickname)
     headers = {
-        'Authorization': APIKEY
+        'Authorization': APIKEY_FIFAONLINE4
     }
     res = requests.get(url, headers=headers)
     return res.json()
@@ -30,7 +26,7 @@ def get_users(nickname):
 def user_matches(user_unique_id):
     url = '''https://api.nexon.co.kr/fifaonline4/v1.0/users/{}/matches?matchtype={}&offset=0&limit=100'''.format(user_unique_id, 40)
     headers = {
-        'Authorization': APIKEY
+        'Authorization': APIKEY_FIFAONLINE4
     }
     res = requests.get(url, headers=headers)
     return res.json()
@@ -39,7 +35,7 @@ def user_matches(user_unique_id):
 def match_detail(match_id):
     url = '''https://api.nexon.co.kr/fifaonline4/v1.0/matches/{}'''.format(match_id)
     headers = {
-        'Authorization': APIKEY
+        'Authorization': APIKEY_FIFAONLINE4
     }
     res = requests.get(url, headers=headers)
     return res.json()
@@ -52,7 +48,7 @@ def get_user_nickname(users, user_ids, user_id):
     return None
 
 
-def get_match_raw_data(users):
+def get_match_raw_data(users, period_start, period_end):
     user_ids = []
     for i in users:
         user_ids.append(get_users(i)['accessId'])
@@ -63,7 +59,7 @@ def get_match_raw_data(users):
             match_info = match_detail(i)
             
             date = match_info['matchDate']
-            if not PERIOD_START < date or not date < PERIOD_END:
+            if not period_start < date or not date < period_end:
                 break
 
             match_end_type = match_info['matchInfo'][0]['matchDetail']['matchEndType']
@@ -203,6 +199,26 @@ def get_rank_table(users, wdl_match_table):
         rank += 1
 
     return result
+
+
+@api_v1_fifaonline4.route('/matchData', methods=['GET'])
+def get_match_data():
+
+    # user array
+    users = ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성']
+
+    # period
+    MAX_GAME_PER_USER = 5
+    period_start = '2020-09-01'
+    period_end = '2020-12-31'
+
+    dt = datetime.strptime(period_end, '%Y-%m-%d')
+    period_end = str(dt + timedelta(days=1))
+
+    match_raw_data = get_match_raw_data(users, period_start, period_end)
+    return jsonify(code=200, users=users, matchRawData=match_raw_data), 200
+
+
 
 
 # def print_arr_2X2(arr):
