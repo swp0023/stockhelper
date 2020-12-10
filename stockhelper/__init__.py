@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 
 from stockhelper.api.v1.account import api_v1_account
+from stockhelper.api.v1.fifaonline4 import api_v1_fifaonline4
 
 from stockhelper.database import init_db
 
@@ -8,26 +9,33 @@ app = Flask(__name__, static_url_path='')
 init_db()
 
 app.register_blueprint(api_v1_account, url_prefix='/api/v1/account')
+app.register_blueprint(api_v1_fifaonline4, url_prefix='/api/v1/fifaOnline4')
 app.config.from_object('stockhelper.config')
- 
+
+
 @app.route('/')
 def index():
-  return render_template('/login.html')
+    return render_template('/login.html')
 
 
 @app.route('/dashboard')
 def dashboard():
-  return render_template('/index.html')
+    return render_template('/index.html')
 
 
 @app.route('/register')
 def register():
-  return render_template('/register.html')
+    return render_template('/register.html')
 
 
 @app.route('/mailCert')
 def mail_cert():
-  return render_template('/mailCert.html')
+    return render_template('/mailCert.html')
+
+
+@app.route('/fifaonline4')
+def fifaonline4():
+    return render_template('/fifaonline4-rank.html')
 
 
 @app.errorhandler(404)

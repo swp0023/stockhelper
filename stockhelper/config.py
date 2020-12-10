@@ -24,3 +24,7 @@ MAIL_PASSWORD = 'qkrtjddn!23'
 
 REGIST_MAIL_SUBJECT = 'NSTOCK email code'
 REGIST_MAIL_CONTENT = 'Certification Code : '
+
+# ================================================================
+
+APIKEY_FIFAONLINE4 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoiMTE3NDQzNjk5OCIsImF1dGhfaWQiOiIyIiwidG9rZW5fdHlwZSI6IkFjY2Vzc1Rva2VuIiwic2VydmljZV9pZCI6IjQzMDAxMTQ4MSIsIlgtQXBwLVJhdGUtTGltaXQiOiI1MDA6MTAiLCJuYmYiOjE2MDU0MjU2MjQsImV4cCI6MTYyMDk3NzYyNCwiaWF0IjoxNjA1NDI1NjI0fQ.T70wy14ebzWz-6q-XrHoSeu2HBcy-0TuJ20wm0qhnMA'
