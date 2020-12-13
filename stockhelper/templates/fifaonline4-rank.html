@@ -1,398 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Fifa Online 4 - Statistics</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-        <!-- third party css -->
-        <link href="assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
-        <!-- third party css end -->
+<head>
+    <meta charset="utf-8" />
+    <title>Fifa Online 4 - Statistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-        <!-- Plugins css-->
-        <link href="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
-        
-        <link href="assets/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+    <!-- third party css -->
+    <link href="assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
 
-        <!-- App css -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- Plugins css-->
+    <link href="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/clockpicker/bootstrap-clockpicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
 
-    </head>
+    <link href="assets/libs/jquery-nice-select/nice-select.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/switchery/switchery.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/select2/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
 
-    <body>
-        <!-- Navigation Bar-->
-        <header id="topnav">
+    <!-- App css -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
-            <!-- Topbar Start -->
-            <div class="navbar-custom">
-                <div class="container-fluid">
-                    <ul class="list-unstyled topnav-menu float-right mb-0">
+</head>
 
-                        <li class="dropdown notification-list">
-                            <!-- Mobile menu toggle-->
-                            <a class="navbar-toggle nav-link">
-                                <div class="lines">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </a>
-                            <!-- End mobile menu toggle-->
-                        </li>
+<body>
+    <!-- Navigation Bar-->
+    <header id="topnav">
 
-            
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="fe-bell noti-icon"></i>
-                                <span class="badge badge-danger rounded-circle noti-icon-badge">5</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="" class="text-muted">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notification
-                                    </h5>
-                                </div>
-
-                                <div class="slimscroll noti-scroll">
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                                        <div class="notify-icon">
-                                            <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                                        <p class="notify-details">Cristina Pride</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Hi, How are you? What about our next meeting</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon">
-                                            <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                                        <p class="notify-details">Karen Robinson</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Wow ! this admin looks good and awesome design</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-warning">
-                                            <i class="mdi mdi-account-plus"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="text-muted">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-info">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-secondary">
-                                            <i class="mdi mdi-heart"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked
-                                            <b>Admin</b>
-                                            <small class="text-muted">13 days ago</small>
-                                        </p>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View all
-                                    <i class="fi-arrow-right"></i>
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
-                                <i class="fe-settings noti-icon"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-
-
-                    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-            
-                        <li class="dropdown d-none d-lg-block">
-                            <a class="nav-link dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                Reports
-                                <i class="mdi mdi-chevron-down"></i> 
-                            </a>
-                            <div class="dropdown-menu">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    Finance Report
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    Monthly Report
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    Revenue Report
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    Settings
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    Help & Support
-                                </a>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <!-- end Topbar -->
-
-
-        </header>
-        <!-- End Navigation Bar-->
-
-        <!-- ============================================================== -->
-        <!-- Start Page Content here -->
-        <!-- ============================================================== -->
-
-        <div class="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar-custom">
             <div class="container-fluid">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Select2</h4>
-                                <p class="sub-header">The jQuery replacement for select boxes</p>
-    
-                                <div class="row">
-    
-                                    <div class="col-md-12">
-                                        <label>Multiple Select</label>
-                                        <p class="text-muted font-13">
-                                            Select2 can take a regular select box like this...
-                                        </p>
-    
-                                        <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ...">
-                                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                    <option value="AK">Alaska</option>
-                                                    <option value="HI">Hawaii</option>
-                                                </optgroup>
-                                                <optgroup label="Pacific Time Zone">
-                                                    <option value="CA">California</option>
-                                                    <option value="NV">Nevada</option>
-                                                </optgroup>
-                                                <optgroup label="Mountain Time Zone">
-                                                    <option value="AZ">Arizona</option>
-                                                    <option value="CO">Colorado</option>
-                                                    <option value="ID">Idaho</option>
-                                                </optgroup>
-                                                <optgroup label="Central Time Zone">
-                                                    <option value="AL">Alabama</option>
-                                                    <option value="AR">Arkansas</option>
-                                                    <option value="IL">Illinois</option>
-                                                    <option value="IA">Iowa</option>
-                                                </optgroup>
-                                                <optgroup label="Eastern Time Zone">
-                                                    <option value="CT">Connecticut</option>
-                                                    <option value="DE">Delaware</option>
-                                                    <option value="FL">Florida</option>
-                                                </optgroup>
-                                            </select>
+                    <li class="dropdown notification-list">
+                        <!-- Mobile menu toggle-->
+                        <a class="navbar-toggle nav-link">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                        <!-- End mobile menu toggle-->
+                    </li>
+
+
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="false" aria-expanded="false">
+                            <i class="fe-bell noti-icon"></i>
+                            <span class="badge badge-danger rounded-circle noti-icon-badge">5</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="m-0">
+                                    <span class="float-right">
+                                        <a href="" class="text-muted">
+                                            <small>Clear All</small>
+                                        </a>
+                                    </span>Notification
+                                </h5>
+                            </div>
+
+                            <div class="slimscroll noti-scroll">
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle"
+                                            alt="" />
                                     </div>
-                                    <!-- end col -->
-    
-                                    
+                                    <p class="notify-details">Cristina Pride</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Hi, How are you? What about our next meeting</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-primary">
+                                        <i class="mdi mdi-comment-account-outline"></i>
+                                    </div>
+                                    <p class="notify-details">Caleb Flakelar commented on Admin
+                                        <small class="text-muted">1 min ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon">
+                                        <img src="assets/images/users/user-4.jpg" class="img-fluid rounded-circle"
+                                            alt="" />
+                                    </div>
+                                    <p class="notify-details">Karen Robinson</p>
+                                    <p class="text-muted mb-0 user-msg">
+                                        <small>Wow ! this admin looks good and awesome design</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-warning">
+                                        <i class="mdi mdi-account-plus"></i>
+                                    </div>
+                                    <p class="notify-details">New user registered.
+                                        <small class="text-muted">5 hours ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-info">
+                                        <i class="mdi mdi-comment-account-outline"></i>
+                                    </div>
+                                    <p class="notify-details">Caleb Flakelar commented on Admin
+                                        <small class="text-muted">4 days ago</small>
+                                    </p>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="notify-icon bg-secondary">
+                                        <i class="mdi mdi-heart"></i>
+                                    </div>
+                                    <p class="notify-details">Carlos Crouch liked
+                                        <b>Admin</b>
+                                        <small class="text-muted">13 days ago</small>
+                                    </p>
+                                </a>
+                            </div>
+
+                            <!-- All-->
+                            <a href="javascript:void(0);"
+                                class="dropdown-item text-center text-primary notify-item notify-all">
+                                View all
+                                <i class="fi-arrow-right"></i>
+                            </a>
+
+                        </div>
+                    </li>
+
+                    <li class="dropdown notification-list">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect">
+                            <i class="fe-settings noti-icon"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
+                    <li class="dropdown d-none d-lg-block">
+                        <a class="nav-link dropdown-toggle waves-effect" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="false" aria-expanded="false">
+                            Reports
+                            <i class="mdi mdi-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                Finance Report
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                Monthly Report
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                Revenue Report
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                Settings
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                Help & Support
+                            </a>
+
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- end Topbar -->
+
+
+    </header>
+    <!-- End Navigation Bar-->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="wrapper">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Select2</h4>
+                            <p class="sub-header">The jQuery replacement for select boxes</p>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <label>Multiple Select</label>
+                                    <p class="text-muted font-13">
+                                        Select2 can take a regular select box like this...
+                                    </p>
+
+                                    <select class="form-control select2-multiple" data-toggle="select2"
+                                        multiple="multiple" data-placeholder="Choose ...">
+                                        <optgroup label="Alaskan/Hawaiian Time Zone">
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                        </optgroup>
+                                        <optgroup label="Pacific Time Zone">
+                                            <option value="CA">California</option>
+                                            <option value="NV">Nevada</option>
+                                        </optgroup>
+                                        <optgroup label="Mountain Time Zone">
+                                            <option value="AZ">Arizona</option>
+                                            <option value="CO">Colorado</option>
+                                            <option value="ID">Idaho</option>
+                                        </optgroup>
+                                        <optgroup label="Central Time Zone">
+                                            <option value="AL">Alabama</option>
+                                            <option value="AR">Arkansas</option>
+                                            <option value="IL">Illinois</option>
+                                            <option value="IA">Iowa</option>
+                                        </optgroup>
+                                        <optgroup label="Eastern Time Zone">
+                                            <option value="CT">Connecticut</option>
+                                            <option value="DE">Delaware</option>
+                                            <option value="FL">Florida</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
-                                <!-- end row -->
-    
+                                <!-- end col -->
+
+
                             </div>
-                            <!-- end card-body-->
+                            <!-- end row -->
+
                         </div>
-                        <!-- end card-->
+                        <!-- end card-body-->
                     </div>
-                    <!-- end col-->
+                    <!-- end card-->
                 </div>
-                <!-- end row-->
+                <!-- end col-->
+            </div>
+            <!-- end row-->
 
-                <div class="row">
-                    <div class="col-lg-6">
-    
-                        <div class="card-box">
-                            <h4 class="header-title">Date Range Picker</h4>
-                            <p class="sub-header">A JavaScript component for choosing date ranges, dates and times.</p>
-    
-                            <div class="form-group mb-3">
-                                <label>Date Range</label>
-                                <input type="text" class="form-control date" id="singledaterange" data-toggle="date-picker" data-cancel-class="btn-warning">
-                            </div>
-    
-                        </div>
-                        <!-- end card-box-->
-    
-                    </div>
-                    <!-- end col-->
+            <div class="row">
+                <div class="col-lg-6">
 
-                    <div class="col-lg-6">
-                        <div class="card-box">
-                            <h4 class="header-title">Date Range Picker</h4>
-                            <p class="sub-header">A JavaScript component for choosing date ranges, dates and times.</p>
-    
-                            <div class="form-group mb-0">
-                                <label>Change button class</label>
-                                <input data-toggle="touchspin" value="5" type="text" data-bts-button-down-class="btn btn-danger" data-bts-button-up-class="btn btn-info">
-                            </div>
-    
+                    <div class="card-box">
+                        <h4 class="header-title">Date Range Picker</h4>
+                        <p class="sub-header">A JavaScript component for choosing date ranges, dates and times.</p>
+
+                        <div class="form-group mb-3">
+                            <label>Date Range</label>
+                            <input type="text" class="form-control date" id="singledaterange" data-toggle="date-picker"
+                                data-cancel-class="btn-warning">
                         </div>
-                        <!-- end card-box-->
-    
-                        
+
                     </div>
-                    <!-- end col -->
+                    <!-- end card-box-->
+
+                </div>
+                <!-- end col-->
+
+                <div class="col-lg-6">
+                    <div class="card-box">
+                        <h4 class="header-title">Date Range Picker</h4>
+                        <p class="sub-header">A JavaScript component for choosing date ranges, dates and times.</p>
+
+                        <div class="form-group mb-0">
+                            <label>Change button class</label>
+                            <input data-toggle="touchspin" value="5" type="text"
+                                data-bts-button-down-class="btn btn-danger" data-bts-button-up-class="btn btn-info">
+                        </div>
+
+                    </div>
+                    <!-- end card-box-->
+
+
                 </div>
                 <!-- end col -->
+            </div>
+            <!-- end col -->
 
-                <button type="button" id="getMatchData" class="btn btn-block btn-lg btn-primary waves-effect waves-light">GET MATCH DATA</button>
+            <button type="button" id="getMatchData"
+                class="btn btn-block btn-lg btn-primary waves-effect waves-light">GET MATCH DATA</button>
 
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <!-- <div class="page-title-right">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <!-- <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Upvex</a></li>
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
                                     <li class="breadcrumb-item active">Datatables</li>
                                 </ol>
                             </div> -->
-                            <h4 class="page-title">Datatables</h4>
-                        </div>
+                        <h4 class="page-title">Datatables</h4>
                     </div>
-                </div>     
-                <!-- end page title --> 
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="header-title">Basic Data Table</h4>
-                                <p class="text-muted font-13 mb-4">
-                                    DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                                    function:
-                                    <code>$().DataTable();</code>.
-                                </p>
-
-                                <table id="matchDataTable" class="table dt-responsive nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>User1</th>
-                                            <th>User1 score</th>
-                                            <th>User2</th>
-                                            <th>User2 score</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-
-                            </div> <!-- end card body-->
-                        </div> <!-- end card -->
-                    </div><!-- end col-->
                 </div>
-                <!-- end row-->
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Basic Data Table</h4>
+                            <p class="text-muted font-13 mb-4">
+                                DataTables has most features enabled by default, so all you need to do to use it with
+                                your own tables is to call the construction
+                                function:
+                                <code>$().DataTable();</code>.
+                            </p>
+
+                            <table id="matchDataTable" class="table dt-responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>User1</th>
+                                        <th>User1 score</th>
+                                        <th>User2</th>
+                                        <th>User2 score</th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
+            </div>
+            <!-- end row-->
 
 
-                
-            </div> <!-- end container -->
-        </div>
-        <!-- end wrapper -->
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+        </div> <!-- end container -->
+    </div>
+    <!-- end wrapper -->
 
-        <!-- Footer Start -->
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- <div class="col-md-6">
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- <div class="col-md-6">
                         2019 &copy; Upvex theme by <a href="">Coderthemes</a> 
                     </div> -->
-                    <!-- <div class="col-md-6">
+                <!-- <div class="col-md-6">
                         <div class="text-md-right footer-links d-none d-sm-block">
                             <a href="javascript:void(0);">About Us</a>
                             <a href="javascript:void(0);">Help</a>
                             <a href="javascript:void(0);">Contact Us</a>
                         </div>
                     </div> -->
-                </div>
             </div>
-        </footer>
-        <!-- end Footer -->
+        </div>
+    </footer>
+    <!-- end Footer -->
 
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div class="rightbar-title">
-                <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="mdi mdi-close"></i>
-                </a>
-                <h5 class="m-0 text-white">Settings</h5>
-            </div>
-            <div class="slimscroll-menu">
-                <!-- User box -->
-                <!-- <div class="user-box">
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+        <div class="rightbar-title">
+            <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                <i class="mdi mdi-close"></i>
+            </a>
+            <h5 class="m-0 text-white">Settings</h5>
+        </div>
+        <div class="slimscroll-menu">
+            <!-- User box -->
+            <!-- <div class="user-box">
                     <div class="user-img">
                         <img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
                         <a href="javascript:void(0);" class="user-edit"><i class="mdi mdi-pencil"></i></a>
@@ -402,8 +415,8 @@
                     <p class="text-muted mb-0"><small>Product Owner</small></p>
                 </div> -->
 
-                <!-- Settings -->
-                <!-- <hr class="mt-0" />
+            <!-- Settings -->
+            <!-- <hr class="mt-0" />
                 <div class="row">
                     <div class="col-6 text-center">
                         <h4 class="mb-1 mt-0">8,504</h4>
@@ -416,7 +429,7 @@
                 </div>
                 <hr class="mb-0" /> -->
 
-                <!-- <div class="p-3">
+            <!-- <div class="p-3">
                     <div class="custom-control custom-switch mb-2">
                         <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
                         <label class="custom-control-label" for="customSwitch1">Notifications</label>
@@ -435,13 +448,13 @@
                     </div>
                 </div> -->
 
-                <!-- Timeline -->
-                <hr class="mt-0" />
-                <!-- <h5 class="pl-3 pr-3">Messages <span class="float-right badge badge-pill badge-danger">25</span></h5> -->
-                <hr class="mb-0" />
-                <div class="p-3">
-                    <div class="inbox-widget">
-                        <!-- <div class="inbox-item">
+            <!-- Timeline -->
+            <hr class="mt-0" />
+            <!-- <h5 class="pl-3 pr-3">Messages <span class="float-right badge badge-pill badge-danger">25</span></h5> -->
+            <hr class="mb-0" />
+            <div class="p-3">
+                <div class="inbox-widget">
+                    <!-- <div class="inbox-item">
                             <div class="inbox-item-img"><img src="assets/images/users/user-2.jpg" class="rounded-circle" alt=""></div>
                             <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Tomaslau</a></p>
                             <p class="inbox-item-text">I've finished it! See you so...</p>
@@ -467,109 +480,110 @@
                             <p class="inbox-item-author"><a href="javascript: void(0);" class="text-dark">Adhamdannaway</a></p>
                             <p class="inbox-item-text">This theme is awesome!</p>
                         </div> -->
-                    </div> <!-- end inbox-widget -->
-                </div> <!-- end .p-3-->
 
-            </div> <!-- end slimscroll-menu-->
-        </div>
-        <!-- /Right-bar -->
+                </div> <!-- end inbox-widget -->
+            </div> <!-- end .p-3-->
 
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
+        </div> <!-- end slimscroll-menu-->
+    </div>
+    <!-- /Right-bar -->
 
-        <!-- Vendor js -->
-        <script src="assets/js/vendor.min.js"></script>
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-        <!-- Plugins js-->
-        <script src="assets/libs/moment/moment.min.js"></script>
-        <script src="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-        <script src="assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
-        <script src="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
 
-        <script src="assets/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
-        <script src="assets/libs/switchery/switchery.min.js"></script>
-        <script src="assets/libs/select2/select2.min.js"></script>
-        <script src="assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
-        <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-        <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <!-- Plugins js-->
+    <script src="assets/libs/moment/moment.min.js"></script>
+    <script src="assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="assets/libs/clockpicker/bootstrap-clockpicker.min.js"></script>
+    <script src="assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="assets/libs/daterangepicker/daterangepicker.js"></script>
 
-        <!-- Init js-->
-        <script src="assets/js/pages/form-pickers.init.js"></script>
-        <script src="assets/js/pages/form-advanced.init.js"></script>
+    <script src="assets/libs/jquery-nice-select/jquery.nice-select.min.js"></script>
+    <script src="assets/libs/switchery/switchery.min.js"></script>
+    <script src="assets/libs/select2/select2.min.js"></script>
+    <script src="assets/libs/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 
-        <!-- third party js -->
-        <script src="assets/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/libs/datatables/dataTables.bootstrap4.js"></script>
-        <script src="assets/libs/datatables/dataTables.responsive.min.js"></script>
-        <script src="assets/libs/datatables/responsive.bootstrap4.min.js"></script>
-        <script src="assets/libs/datatables/dataTables.buttons.min.js"></script>
-        <script src="assets/libs/datatables/buttons.bootstrap4.min.js"></script>
-        <script src="assets/libs/datatables/buttons.html5.min.js"></script>
-        <script src="assets/libs/datatables/buttons.flash.min.js"></script>
-        <script src="assets/libs/datatables/buttons.print.min.js"></script>
-        <script src="assets/libs/datatables/dataTables.keyTable.min.js"></script>
-        <script src="assets/libs/datatables/dataTables.select.min.js"></script>
-        <!-- third party js ends -->
+    <!-- Init js-->
+    <script src="assets/js/pages/form-pickers.init.js"></script>
+    <script src="assets/js/pages/form-advanced.init.js"></script>
 
-        <!-- Datatables init -->
-        <script src="assets/js/pages/datatables.init.js"></script>
+    <!-- third party js -->
+    <script src="assets/libs/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables/dataTables.bootstrap4.js"></script>
+    <script src="assets/libs/datatables/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="assets/libs/datatables/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="assets/libs/datatables/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables/buttons.flash.min.js"></script>
+    <script src="assets/libs/datatables/buttons.print.min.js"></script>
+    <script src="assets/libs/datatables/dataTables.keyTable.min.js"></script>
+    <script src="assets/libs/datatables/dataTables.select.min.js"></script>
+    <!-- third party js ends -->
 
-        <!-- App js-->
-        <script src="assets/js/app.min.js"></script>
-        
-    </body>
+    <!-- Datatables init -->
+    <script src="assets/js/pages/datatables.init.js"></script>
 
-    <script>
-        var matchRawData = [];
-        var users = [];
+    <!-- App js-->
+    <script src="assets/js/app.min.js"></script>
 
-        function refreshMatchDataTable(){
-            let data = matchRawData.reverse()
-            $('#matchDataTable').DataTable({
-                destroy: true, 
-                order: [[ 0, "desc" ]],
-                data: data
-            });
-        }
+</body>
 
+<script>
+    var matchRawData = [];
+    var users = [];
+    // var ip = '';
 
-        // var ip = '';
-
-        // $.getJSON("https://api.ipify.org/?format=json", function(e) {
-        //     ip = e.ip;
-        // });
-
-        $("#getMatchData").click(function () {
-            var data = {
-                // "username": $('#username').val(),
-                // "password": $('#password').val(),
-                // "ip": ip
-            }
-
-            $.ajax({
-                url: '/api/v1/fifaOnline4/matchData',
-                type: 'get',
-                // timeout: 10000,
-                contentType:"application/json; charset=utf-8",
-                dataType:"json",
-                data: JSON.stringify(data),
-    
-                success: function (data) {
-                    matchRawData = data['data'];
-                    users = data['users'];
-                    refreshMatchDataTable();
-                }, beforeSend:function() {
-                    $('#getMatchData').attr('disabled', true)
-                }, complete:function(){
-                    $('#getMatchData').attr('disabled', false)
-                }, error: function (data) {
-                    alert('get data error. sorry')
-                }
-            });
+    function refreshMatchDataTable() {
+        let data = matchRawData.reverse()
+        $('#matchDataTable').DataTable({
+            destroy: true,
+            order: [[0, "desc"]],
+            data: data
         });
 
-        
+    }
 
-    </script>
+    // $.getJSON("https://api.ipify.org/?format=json", function(e) {
+    //     ip = e.ip;
+    // });
+
+    $("#getMatchData").click(function () {
+        var data = {
+            // "username": $('#username').val(),
+            // "password": $('#password').val(),
+            // "ip": ip
+        }
+
+        $.ajax({
+            url: '/api/v1/fifaOnline4/matchData',
+            type: 'get',
+            // timeout: 10000,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(data),
+
+            success: function (data) {
+                matchRawData = data['data'];
+                users = data['users'];
+                refreshMatchDataTable();
+            }, beforeSend: function () {
+                $('#getMatchData').attr('disabled', true)
+            }, complete: function () {
+                $('#getMatchData').attr('disabled', false)
+            }, error: function (data) {
+                alert('get data error. sorry')
+            }
+        });
+    });
+
+
+
+</script>
+
 </html>
