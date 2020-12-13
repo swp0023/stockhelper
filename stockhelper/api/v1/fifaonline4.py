@@ -87,6 +87,7 @@ def get_match_raw_data(users, period_start, period_end):
 
     result.sort(key=lambda x: x[0])
     result = sorted(result, reverse=True)
+
     return result
 
 
@@ -216,7 +217,8 @@ def get_match_data():
     period_end = str(dt + timedelta(days=1))
 
     match_raw_data = get_match_raw_data(users, period_start, period_end)
-    return jsonify(code=200, users=users, matchRawData=match_raw_data), 200
+
+    return jsonify(data=match_raw_data, code=200, users=users), 200
 
 
 

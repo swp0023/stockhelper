@@ -338,7 +338,7 @@
                                     <code>$().DataTable();</code>.
                                 </p>
 
-                                <table id="basic-datatable" class="table dt-responsive nowrap">
+                                <table id="matchDataTable" class="table dt-responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>Date</th>
@@ -348,19 +348,6 @@
                                             <th>User2 score</th>
                                         </tr>
                                     </thead>
-                                
-                                    <tbody id="matchDatas">
-                                        <tr>
-                                            <td>please click get match data</td>
-                                        </tr>
-                                        <!-- <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                        </tr> -->
-                                    </tbody>
                                 </table>
 
                             </div> <!-- end card body-->
@@ -538,19 +525,29 @@
 
     <script>
         var matchRawData = [];
+        var users = [];
 
         function refreshMatchDataTable(){
-            $("#matchDatas").empty();
-            for (let row = matchRawData.length-1; row >= 0; row--){
-                let result = '<tr>'
-                console.log(result, matchRawData[row])
-                for (let i = 0; i < matchRawData[row].length; i++) {
-                    result += '<td>' + matchRawData[row][i] + '</td>'
-                }
-                result += '</tr>'
-                $("#matchDatas").append(result);
-            }
+            let data = matchRawData.reverse()
+            $('#matchDataTable').DataTable({
+                destroy: true, 
+                order: [[ 0, "desc" ]],
+                data: data
+            });
 
+            // $('#matchDataTable').DataTable().destroy();
+            // $("#matchDataTable").empty();
+
+            // for (let row = 0; row < matchRawData.length; row++){
+            //     let result = '<tr>'
+            //     for (let i = 0; i < matchRawData[row].length; i++) {
+            //         result += '<td>' + matchRawData[row][i] + '</td>'
+            //     }
+            //     result += '</tr>'
+            //     $("#matchDatas").append(result);
+            // }
+
+            
         }
 
 
@@ -576,11 +573,11 @@
                 data: JSON.stringify(data),
     
                 success: function (data) {
-                    matchRawData = data['matchRawData'];
+                    matchRawData = data['data'];
+                    users = data['users'];
                     refreshMatchDataTable();
                 }, beforeSend:function() {
                     $('#getMatchData').attr('disabled', true)
-                    $('#matchDatas').children('tr').children()[0].textContent = 'Loading'
                 }, complete:function(){
                     $('#getMatchData').attr('disabled', false)
                 }, error: function (data) {
