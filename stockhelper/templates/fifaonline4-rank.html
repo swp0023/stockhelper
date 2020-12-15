@@ -219,8 +219,26 @@
     <div class="wrapper">
         <div class="container-fluid">
 
+            <!-- start page title -->
             <div class="row">
                 <div class="col-12">
+                    <div class="page-title-box">
+                        <!-- <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Upvex</a></li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                    <li class="breadcrumb-item active">Datatables</li>
+                                </ol>
+                            </div> -->
+                        <h4 class="page-title">조건 설정</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+
+                <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title">사용자 검색</h4>
@@ -274,11 +292,8 @@
                     <!-- end card-->
                 </div>
                 <!-- end col-->
-            </div>
-            <!-- end row-->
 
-            <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
 
                     <div class="card-box">
                         <h4 class="header-title">기간</h4>
@@ -296,7 +311,7 @@
                 </div>
                 <!-- end col-->
 
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="card-box">
                         <h4 class="header-title">사용자간 최대 경기 수</h4>
                         <p class="sub-header">(준비중)</p>
@@ -335,6 +350,41 @@
                 </div>
             </div>
             <!-- end page title -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">Ranking</h4>
+                            <!-- <p class="text-muted font-13 mb-4">
+                                DataTables has most features enabled by default, so all you need to do to use it with
+                                your own tables is to call the construction
+                                function:
+                                <code>$().DataTable();</code>.
+                            </p> -->
+
+                            <table id="rankTable" class="table dt-responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>순위</th>
+                                        <th>닉네임</th>
+                                        <th>경기수</th>
+                                        <th>승점</th>
+                                        <th>승</th>
+                                        <th>무</th>
+                                        <th>패</th>
+                                        <th>득점</th>
+                                        <th>실점</th>
+                                        <th>득실차</th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
+            </div>
+            <!-- end row-->
 
             <div class="row">
                 <div class="col-12">
@@ -537,6 +587,9 @@
 <script>
     var matchRawData = [];
     var users = [];
+    var matchRawTable = [];
+    var wdlMatchTable = [];
+    var rankData = [];
     // var ip = '';
 
     function refreshMatchDataTable() {
@@ -546,7 +599,91 @@
             order: [[0, "desc"]],
             data: data
         });
+    }
 
+    function getRankTable(){
+        let data = {
+            "users": users,
+            "wdlMatchTable": wdlMatchTable,
+        }
+
+        $.ajax({
+            url: '/api/v1/fifaOnline4/rankData',
+            type: 'get',
+            // timeout: 10000,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                data: JSON.stringify(data)
+            },
+            success: function (data) {
+                rankData = data['data'];
+                // refreshMatchDataTable();
+            }, beforeSend: function () {
+                // $('#getMatchData').attr('disabled', true)
+            }, complete: function () {
+                // $('#getMatchData').attr('disabled', false)
+            }, error: function (data) {
+                alert('error get rank data')
+            }
+        });
+    }
+
+    function getWdlMatchTable(){
+        let data = {
+            "users": users,
+            "usersMatchTable": usersMatchTable,
+        }
+
+        $.ajax({
+            url: '/api/v1/fifaOnline4/wdlMatchTable',
+            type: 'get',
+            // timeout: 10000,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                data: JSON.stringify(data)
+            },
+            success: function (data) {
+                wdlMatchTable = data['data'];
+                getRankTable();
+            }, beforeSend: function () {
+                // $('#getMatchData').attr('disabled', true)
+            }, complete: function () {
+                // $('#getMatchData').attr('disabled', false)
+            }, error: function (data) {
+                alert('error get wdl match table')
+            }
+        });
+    }
+
+    function getUsersMatchTable(){
+        let data = {
+            "maxMatchCount": 5, // 최대 연산 경기 수
+            "users": users,
+            "matchRawData": matchRawData,
+        }
+
+        $.ajax({
+            url: '/api/v1/fifaOnline4/usersMatchTable',
+            type: 'get',
+            // timeout: 10000,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: {
+                data: JSON.stringify(data)
+            },
+            success: function (data) {
+                usersMatchTable = data['data'];
+                getWdlMatchTable();
+            }, beforeSend: function () {
+                // $('#getMatchData').attr('disabled', true)
+            }, complete: function () {
+                // $('#getMatchData').attr('disabled', false)
+            }, error: function (data) {
+                alert('error get user match table')
+            }
+        });
     }
 
     // $.getJSON("https://api.ipify.org/?format=json", function(e) {
@@ -554,7 +691,7 @@
     // });
 
     $("#getMatchData").click(function () {
-        var data = {
+        let data = {
             // "username": $('#username').val(),
             // "password": $('#password').val(),
             // "ip": ip
@@ -569,15 +706,17 @@
             data: JSON.stringify(data),
 
             success: function (data) {
-                matchRawData = data['data'];
                 users = data['users'];
+                matchRawData = data['data'];
+
                 refreshMatchDataTable();
+                getUsersMatchTable()
             }, beforeSend: function () {
                 $('#getMatchData').attr('disabled', true)
             }, complete: function () {
                 $('#getMatchData').attr('disabled', false)
             }, error: function (data) {
-                alert('get data error. sorry')
+                alert('데이터를 가지고 오는데 실패했습니다.')
             }
         });
     });

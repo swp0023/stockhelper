@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
 import requests
+import json
 
 from stockhelper.config import APIKEY_FIFAONLINE4, RESPONSE_MSG_400
 
@@ -219,40 +220,46 @@ def match_data():
     return jsonify(data=match_raw_data, code=200, users=users), 200
 
 
-@api_v1_fifaonline4.route('/usersMatchData', methods=['GET'])
-def users_match_data():
+@api_v1_fifaonline4.route('/usersMatchTable', methods=['GET'])
+def users_match_table():
     try:
-        users = request.json.get('users')
-        match_raw_data = request.json.get('usersMatchRawData')
-        max_match_count_each_user = request.json.get('maxMatchCount')
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        match_raw_data = data['matchRawData']
+        max_match_count = data['maxMatchCount']
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
-    users_match_raw_table = get_match_data_user_table(users, match_raw_data, max_match_count_each_user)
+    users_match_raw_table = get_match_data_user_table(users, match_raw_data, max_match_count)
     return jsonify(data=users_match_raw_table), 200
 
 
-@api_v1_fifaonline4.route('/wdlMatchData', methods=['GET'])
+@api_v1_fifaonline4.route('/wdlMatchTable', methods=['GET'])
 def wdl_match_data():
     try:
-        users = request.json.get('users')
-        users_match_data = request.json.get('usersMatchData')
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        users_match_table = data['usersMatchTable']
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
-    wdl_match_table = get_wdl_match_table(users, users_match_data)
+    wdl_match_table = get_wdl_match_table(users, users_match_table)
     return jsonify(data=wdl_match_table), 200
 
 
 @api_v1_fifaonline4.route('/rankData', methods=['GET'])
 def rank_data():
     try:
-        users = request.json.get('users')
-        wdl_match_data = request.json.get('wdlMatchData')
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        wdl_match_table = data['wdlMatchTable']
     except:
         return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
-    rank_table = get_rank_table(users, wdl_match_data)
+    rank_table = get_rank_table(users, wdl_match_table)
     return jsonify(data=rank_table), 200
 
 # def print_arr_2X2(arr):
