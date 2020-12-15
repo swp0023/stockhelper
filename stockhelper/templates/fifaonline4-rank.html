@@ -592,6 +592,15 @@
     var rankData = [];
     // var ip = '';
 
+    function refreshRankTable() {
+        let data = rankData.reverse()
+        $('#rankTable').DataTable({
+            destroy: true,
+            order: [[0, "asc"]],
+            data: data
+        });
+    }
+
     function refreshMatchDataTable() {
         let data = matchRawData.reverse()
         $('#matchDataTable').DataTable({
@@ -618,7 +627,7 @@
             },
             success: function (data) {
                 rankData = data['data'];
-                // refreshMatchDataTable();
+                refreshRankTable();
             }, beforeSend: function () {
                 // $('#getMatchData').attr('disabled', true)
             }, complete: function () {

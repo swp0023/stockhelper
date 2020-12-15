@@ -192,10 +192,10 @@ def get_rank_table(users, wdl_match_table):
     temp_result.reverse()
 
     result = []
-    result.append(['순위', '팀', '경기수', '승점', '승', '무', '패', '득점', '실점', '득실차', '도움', '파울'])
+    # result.append(['순위', '팀', '경기수', '승점', '승', '무', '패', '득점', '실점', '득실차'])
     rank = 1
     for row in temp_result:
-        result.append([rank, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], 0, 0])
+        result.append([rank, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]])
         rank += 1
 
     return result
