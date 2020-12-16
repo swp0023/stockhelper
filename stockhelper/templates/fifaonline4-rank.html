@@ -314,11 +314,11 @@
                 <div class="col-lg-4">
                     <div class="card-box">
                         <h4 class="header-title">사용자간 최대 경기 수</h4>
-                        <p class="sub-header">(준비중)</p>
+                        <p class="sub-header"></p>
 
                         <div class="form-group mb-0">
                             <!-- <label>Change button class</label> -->
-                            <input data-toggle="touchspin" value="5" type="text"
+                            <input id="maxMatchCount" data-toggle="touchspin" value="5" type="text"
                                 data-bts-button-down-class="btn btn-danger" data-bts-button-up-class="btn btn-info">
                         </div>
 
@@ -673,7 +673,7 @@
 
     function getUsersMatchTable(){
         let data = {
-            "maxMatchCount": 5, // 최대 연산 경기 수
+            "maxMatchCount": parseInt($("#maxMatchCount").val()),
             "users": users,
             "matchRawData": matchRawData,
         }
