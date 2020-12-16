@@ -390,6 +390,25 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="header-title">상대전적</h4>
+                            <p class="text-muted font-13 mb-4">
+                                왼쪽 닉네임 기준으로 산정한 승-무-패-득점-실점
+                            </p>
+
+                            <table id="oneOnOneTable" class="table dt-responsive nowrap">
+                                
+                            </table>
+
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
+            </div>
+            <!-- end row-->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="header-title">기준 데이터</h4>
                             <!-- <p class="text-muted font-13 mb-4">
                                 DataTables has most features enabled by default, so all you need to do to use it with
@@ -615,6 +634,34 @@
         });
     }
 
+    function makeTableHead(table, arr) {
+        let column = ''
+        column += '<th>구분</th>'
+        for (let i = 0; i < arr.length; i++) {
+            column += '<th>' + arr[i] + '</th>'
+        }
+        table.append('<thead><tr>' + column + '</tr></thead>')
+    }
+
+    function makeTableBody(table, arrHead, arr) {
+        let result = []
+        for (let i = 0; i< arr.length; i++) {
+            let temp = []
+            temp.push(arrHead[i]);
+            for (let j = 0; j < arr[i].length; j++) {
+                temp.push(arr[i][j].join('-'))
+            }
+            result.push(temp)
+        }
+
+        let data = result.reverse()
+        table.DataTable({
+            destroy: true,
+            // order: [[0, "asc"]],
+            data: result
+        });
+    }
+
     function getRankTable(){
         let data = {
             "users": users,
@@ -643,6 +690,8 @@
         });
     }
 
+    
+
     function getWdlMatchTable(){
         let data = {
             "users": users,
@@ -660,6 +709,10 @@
             },
             success: function (data) {
                 wdlMatchTable = data['data'];
+                
+                makeTableHead($('#oneOnOneTable'), users);
+                makeTableBody($('#oneOnOneTable'), users, wdlMatchTable);
+                
                 getRankTable();
             }, beforeSend: function () {
                 // $('#getMatchData').attr('disabled', true)
