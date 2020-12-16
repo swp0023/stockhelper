@@ -205,15 +205,27 @@ def get_rank_table(users, wdl_match_table):
 def match_data():
 
     # user array
-    users = ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성']
+    # users = ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성']
 
     # period
-    MAX_GAME_PER_USER = 5
-    period_start = '2020-09-01'
-    period_end = '2020-12-31'
+    # period_start = '2020-09-01'
+    # period_end = '2020-12-31'
+
+    try:
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        period_start = data['matchPeriod'][0]
+        period_end = data['matchPeriod'][1]
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
 
     dt = datetime.strptime(period_end, '%Y-%m-%d')
     period_end = str(dt + timedelta(days=1))
+
+    print(users)
+    print(period_start)
+    print(period_end)
 
     match_raw_data = get_match_raw_data(users, period_start, period_end)
 

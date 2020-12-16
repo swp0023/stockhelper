@@ -297,11 +297,11 @@
 
                     <div class="card-box">
                         <h4 class="header-title">기간</h4>
-                        <p class="sub-header">(준비중)</p>
+                        <p class="sub-header"></p>
 
                         <div class="form-group mb-3">
                             <!-- <label>Date Range</label> -->
-                            <input type="text" class="form-control date" id="singledaterange" data-toggle="date-picker"
+                            <input type="text" class="form-control date" id="matchPeriod" data-toggle="date-picker"
                                 data-cancel-class="btn-warning">
                         </div>
 
@@ -314,11 +314,11 @@
                 <div class="col-lg-4">
                     <div class="card-box">
                         <h4 class="header-title">사용자간 최대 경기 수</h4>
-                        <p class="sub-header">(준비중)</p>
+                        <p class="sub-header"></p>
 
                         <div class="form-group mb-0">
                             <!-- <label>Change button class</label> -->
-                            <input data-toggle="touchspin" value="5" type="text"
+                            <input id="maxMatchCount" data-toggle="touchspin" value="5" type="text"
                                 data-bts-button-down-class="btn btn-danger" data-bts-button-up-class="btn btn-info">
                         </div>
 
@@ -585,12 +585,17 @@
 </body>
 
 <script>
-    var matchRawData = [];
     var users = [];
+    
+    var matchRawData = [];
     var matchRawTable = [];
     var wdlMatchTable = [];
     var rankData = [];
+
+    var matchPeriod = null;
     // var ip = '';
+
+    init();
 
     function refreshRankTable() {
         let data = rankData.reverse()
@@ -668,7 +673,7 @@
 
     function getUsersMatchTable(){
         let data = {
-            "maxMatchCount": 5, // 최대 연산 경기 수
+            "maxMatchCount": parseInt($("#maxMatchCount").val()),
             "users": users,
             "matchRawData": matchRawData,
         }
@@ -699,10 +704,29 @@
     //     ip = e.ip;
     // });
 
+    function getMatchPeriod(strDate) {
+        let result = []
+        let period = strDate.split(' - ')
+        for (let i = 0; i < period.length; i++) {
+            let temp = period[i].split('/')
+            result.push(temp[2] + '-' + temp[0] + '-' + temp[1])
+        }
+        return result
+    }
+
     $("#getMatchData").click(function () {
+        tempPeriod = getMatchPeriod($('#matchPeriod').val())
+        if (!matchPeriod) {
+            matchPeriod = tempPeriod;
+        } else if (tempPeriod[0] == matchPeriod[0] && tempPeriod[1] == matchPeriod[1]) {
+            return null
+        } else if (tempPeriod[0] >= matchPeriod[0] && tempPeriod[1] <= matchPeriod[1]) {
+            alert('getUsersMatchTable() 에 시작, 끝값 넣기.(users 변경됬을때는 다르게 처리 필요.)')
+        }
+
         let data = {
-            // "username": $('#username').val(),
-            // "password": $('#password').val(),
+            "users": ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성'],
+            "matchPeriod": matchPeriod,
             // "ip": ip
         }
 
@@ -712,7 +736,9 @@
             // timeout: 10000,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify(data),
+            data: {
+                data: JSON.stringify(data)
+            },
 
             success: function (data) {
                 users = data['users'];
@@ -729,6 +755,14 @@
             }
         });
     });
+
+    function init() {
+        let date = new Date();
+
+
+        $('#matchPeriod').val('01/01/' + date.getFullYear() + ' - ' + 
+            (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear())
+    }
 
 
 
