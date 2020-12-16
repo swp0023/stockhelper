@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
 import requests
+import json
 
-from stockhelper.config import APIKEY_FIFAONLINE4
+from stockhelper.config import APIKEY_FIFAONLINE4, RESPONSE_MSG_400
 
 
 api_v1_fifaonline4 = Blueprint('api_v1_fifaonline4', __name__)
@@ -91,19 +92,17 @@ def get_match_raw_data(users, period_start, period_end):
     return result
 
 
-def get_match_data_user_table(users, match_raw_data):
+def get_match_data_user_table(users, match_raw_data, max_match_count):
     user_match_result = [[[] * 5 for i in users] for j in users]
 
     for i in match_raw_data:
-        if not PERIOD_START < i[0] or not i[0] < PERIOD_END:
-            continue
 
         for j in range(0, len(users)):
             for k in range(j, len(users)):
                 if j == k:
                     continue
 
-                if len(user_match_result[j][k]) >= MAX_GAME_PER_USER:
+                if len(user_match_result[j][k]) >= max_match_count:
                     continue
 
                 isHas = False
@@ -193,17 +192,17 @@ def get_rank_table(users, wdl_match_table):
     temp_result.reverse()
 
     result = []
-    result.append(['순위', '팀', '경기수', '승점', '승', '무', '패', '득점', '실점', '득실차', '도움', '파울'])
+    # result.append(['순위', '팀', '경기수', '승점', '승', '무', '패', '득점', '실점', '득실차'])
     rank = 1
     for row in temp_result:
-        result.append([rank, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], 0, 0])
+        result.append([rank, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]])
         rank += 1
 
     return result
 
 
 @api_v1_fifaonline4.route('/matchData', methods=['GET'])
-def get_match_data():
+def match_data():
 
     # user array
     users = ['jo바페', 'jo펩', 'jo태곤', '다시돌아왔도다', '이언러쉬이이이이', 'jo인성']
@@ -221,7 +220,47 @@ def get_match_data():
     return jsonify(data=match_raw_data, code=200, users=users), 200
 
 
+@api_v1_fifaonline4.route('/usersMatchTable', methods=['GET'])
+def users_match_table():
+    try:
+        data = json.loads(request.args.get('data'))
 
+        users = data['users']
+        match_raw_data = data['matchRawData']
+        max_match_count = data['maxMatchCount']
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+
+    users_match_raw_table = get_match_data_user_table(users, match_raw_data, max_match_count)
+    return jsonify(data=users_match_raw_table), 200
+
+
+@api_v1_fifaonline4.route('/wdlMatchTable', methods=['GET'])
+def wdl_match_data():
+    try:
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        users_match_table = data['usersMatchTable']
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+
+    wdl_match_table = get_wdl_match_table(users, users_match_table)
+    return jsonify(data=wdl_match_table), 200
+
+
+@api_v1_fifaonline4.route('/rankData', methods=['GET'])
+def rank_data():
+    try:
+        data = json.loads(request.args.get('data'))
+
+        users = data['users']
+        wdl_match_table = data['wdlMatchTable']
+    except:
+        return jsonify(code=400, msg=RESPONSE_MSG_400), 400
+
+    rank_table = get_rank_table(users, wdl_match_table)
+    return jsonify(data=rank_table), 200
 
 # def print_arr_2X2(arr):
 #     for i in arr:
