@@ -9,7 +9,7 @@ app = Flask(__name__, static_url_path='')
 init_db()
 
 app.register_blueprint(api_v1_account, url_prefix='/api/v1/account')
-app.register_blueprint(api_v1_fifaonline4, url_prefix='/api/v1/fifaOnline4')
+app.register_blueprint(api_v1_fifaonline4, url_prefix='/api/v1/fo4')
 app.config.from_object('stockhelper.config')
 
 
@@ -33,7 +33,7 @@ def mail_cert():
     return render_template('/mailCert.html')
 
 
-@app.route('/fifaonline4')
+@app.route('/fo4')
 def fifaonline4():
     return render_template('/fifaonline4-rank.html')
 
