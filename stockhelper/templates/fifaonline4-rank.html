@@ -773,10 +773,13 @@
         tempPeriod = getMatchPeriod($('#matchPeriod').val())
         if (!matchPeriod) {
             matchPeriod = tempPeriod;
-        } else if (tempPeriod[0] == matchPeriod[0] && tempPeriod[1] == matchPeriod[1]) {
-            return null
-        } else if (tempPeriod[0] >= matchPeriod[0] && tempPeriod[1] <= matchPeriod[1]) {
-            alert('getUsersMatchTable() 에 시작, 끝값 넣기.(users 변경됬을때는 다르게 처리 필요.)')
+        } else {
+            if (tempPeriod[0] == matchPeriod[0] && tempPeriod[1] == matchPeriod[1]) {
+                return null
+            } else {
+                matchPeriod = tempPeriod;
+            }
+            // 이전보다 작은 영역 조회시 처리 필요.
         }
 
         let data = {
